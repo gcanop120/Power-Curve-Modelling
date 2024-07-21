@@ -6,6 +6,7 @@ from utils.generation import get_histograms
 from utils.generation import get_frequency
 from utils.generation import gen_power_curves
 from utils.generation import cumulate_power
+from utils.mapping import plot_power_curves_performance
 
 if __name__ == '__main__':
     PATH_geo = "../resources/Time_Series_Statistical_Features_per_Node.csv"
@@ -16,9 +17,11 @@ if __name__ == '__main__':
     filtered_nodes = filter_time_series_data(path=PATH_data, index_id="Date", nodes=selected_nodes)
     histograms = get_histograms(filtered_nodes, bin_size=0.025, max_velocity=2.75)
     frequencies = get_frequency(histograms)
-    plot_histograms(histograms)
+    plot_histograms(frequencies)
     power_curves = gen_power_curves(frequencies=frequencies, min_ci_speed=0.2, min_rate_pct=30,
                                     delta_speed=0.025, swept_area=0.7854, cp=0.37, water_density=1025)
     cumulated_power = cumulate_power(frequency=frequencies, power_curves=power_curves[2])
+    plot_power_curves_performance(cumulated_power)
+
 
 

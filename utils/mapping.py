@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -80,3 +81,26 @@ def plot_histograms(data: pd.DataFrame):
     plt.grid(which='major', linestyle='-', linewidth='0.5', color='black', alpha=0.15)
     plt.grid(which='minor', linestyle='-', linewidth='0.5', color='black', alpha=0.10)
     plt.show(block=True)
+
+
+def plot_power_curves_performance(cumulated_power: np.array):
+    """
+    Function that plots the cumulative power performance for the power curves.
+    :param cumulated_power: cumulative power performance for the power curves.
+    :return: bar plot with the cumulative power performance for each power curve.
+    """
+    x = np.arange(1, len(cumulated_power) + 1, 1)
+    y = cumulated_power
+
+    # Bar plot of the cumulative power performance curve. Maximum power is highlighted in red.
+    fig, ax = plt.subplots()
+    ax.bar(x, y, color='YellowGreen')
+    ax.bar(np.argmax(y) + 1, y[np.argmax(y)], color='IndianRed')
+    plt.xlabel('Power Curve')
+    plt.ylabel('Cumulative Power [W]')
+    plt.title('Cumulative Power Performance')
+    plt.minorticks_on()
+    plt.grid(which='major', linestyle='-', linewidth='0.5', color='black', alpha=0.15)
+    plt.grid(which='minor', linestyle='-', linewidth='0.5', color='black', alpha=0.10)
+    plt.show(block=True)
+    return

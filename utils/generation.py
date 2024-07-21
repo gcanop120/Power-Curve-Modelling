@@ -62,7 +62,7 @@ def gen_power_curves(frequencies: pd.DataFrame, min_ci_speed: float, min_rate_pc
                 power_curve.append(0.5 * cp * swept_area * water_density * (maximum_co_vector[i] ** 3))
         power_curves.append(power_curve)
     power_curves = np.array(power_curves).T
-    return minimum_ci_vector, maximum_co_vector,power_curves
+    return minimum_ci_vector, maximum_co_vector, power_curves
 
 
 def cumulate_power(frequency: pd.DataFrame, power_curves: np.array):
