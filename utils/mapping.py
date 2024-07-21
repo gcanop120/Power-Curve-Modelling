@@ -62,25 +62,40 @@ def selection_node(data: pd.DataFrame):
     return selected_nodes
 
 
-def plot_histograms(data: pd.DataFrame):
+def plot_histograms(data: pd.DataFrame, relative: bool = True):
     """
     Function that plots histograms for a given data set.
 
+    :param relative: Indicates if the histograms should be plotted as relative values.
     :param data: Dataframe with the data to generate the histograms.
     :return: Plot of the histograms.
     """
-    fig, ax = plt.subplots()
-    # Plot as a graph bar the histograms for each node
-    for node in data.columns:
-        ax.hist(data.index, bins=data.index, weights=data[node], alpha=0.7, label=node)
-    ax.legend()
-    plt.xlabel('Velocity [m/s]')
-    plt.ylabel('Number of records')
-    plt.title('Velocity Histograms')
-    plt.minorticks_on()
-    plt.grid(which='major', linestyle='-', linewidth='0.5', color='black', alpha=0.15)
-    plt.grid(which='minor', linestyle='-', linewidth='0.5', color='black', alpha=0.10)
-    plt.show(block=True)
+    if relative is True:
+        fig, ax = plt.subplots()
+        # Plot as a graph bar the histograms for each node
+        for node in data.columns:
+            ax.hist(data.index, bins=data.index, weights=data[node], alpha=0.7, label=node)
+        ax.legend()
+        plt.xlabel('Velocity [m/s]')
+        plt.ylabel('Relative Frequency')
+        plt.title('Velocity Histograms')
+        plt.minorticks_on()
+        plt.grid(which='major', linestyle='-', linewidth='0.5', color='black', alpha=0.15)
+        plt.grid(which='minor', linestyle='-', linewidth='0.5', color='black', alpha=0.10)
+        plt.show(block=True)
+    else:
+        fig, ax = plt.subplots()
+        # Plot as a graph bar the histograms for each node
+        for node in data.columns:
+            ax.bar(data.index, data[node], alpha=0.7, label=node)
+        ax.legend()
+        plt.xlabel('Velocity [m/s]')
+        plt.ylabel('Number of records')
+        plt.title('Velocity Histograms')
+        plt.minorticks_on()
+        plt.grid(which='major', linestyle='-', linewidth='0.5', color='black', alpha=0.15)
+        plt.grid(which='minor', linestyle='-', linewidth='0.5', color='black', alpha=0.10)
+        plt.show(block=True)
 
 
 def plot_power_curves_performance(cumulated_power: np.array):
