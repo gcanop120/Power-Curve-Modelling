@@ -18,9 +18,10 @@ if __name__ == '__main__':
     histograms = get_histograms(filtered_nodes, bin_size=0.025, max_velocity=2.75)
     frequencies = get_frequency(histograms)
     plot_histograms(frequencies, relative=True)
+    # Power curves return three values: minimum cut-in speed, maximum cut-out speed and power curves for each node.
     power_curves = gen_power_curves(frequencies=frequencies, min_ci_speed=0.2, min_rate_pct=30,
                                     delta_speed=0.025, swept_area=0.7854, cp=0.37, water_density=1025)
-    cumulated_power = cumulate_power(frequency=frequencies, power_curves=power_curves[2])
+    cumulated_power = cumulate_power(frequency=frequencies, power_curves=power_curves[2], hourly_data_points=len(filtered_nodes))
     plot_power_curves_performance(cumulated_power)
 
 
