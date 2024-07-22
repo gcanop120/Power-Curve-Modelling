@@ -96,6 +96,7 @@ def plot_histograms(data: pd.DataFrame, relative: bool = True):
         plt.grid(which='major', linestyle='-', linewidth='0.5', color='black', alpha=0.15)
         plt.grid(which='minor', linestyle='-', linewidth='0.5', color='black', alpha=0.10)
         plt.show(block=True)
+    return
 
 
 def plot_power_curves_performance(cumulated_power: np.array):
@@ -112,7 +113,7 @@ def plot_power_curves_performance(cumulated_power: np.array):
     ax.bar(x, y, color='YellowGreen')
     ax.bar(np.argmax(y) + 1, y[np.argmax(y)], color='IndianRed')
     plt.xlabel('Power Curve')
-    plt.ylabel('Cumulative Power [W]')
+    plt.ylabel('Cumulative Power [Wh]')
     plt.title('Cumulative Power Performance')
     plt.minorticks_on()
     plt.grid(which='major', linestyle='-', linewidth='0.5', color='black', alpha=0.15)
