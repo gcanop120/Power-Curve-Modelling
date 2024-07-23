@@ -1,3 +1,5 @@
+import matplotlib.pyplot as plt
+
 from utils.files import load_time_series_geo
 from utils.files import filter_time_series_data
 from utils.mapping import selection_node
@@ -27,8 +29,7 @@ if __name__ == '__main__':
     plot_power_curves_performance(cumulated_power_frequencies)
     # Time series cumulative approach
     cumulated_power_time_series = cumulate_power_time_series(min_rated_speed=0.6, max_rated_speed=3, filtered_nodes=filtered_nodes,
-                                                             delta=0.01, density=1025, swept_area=0.7854, cp=0.37)
-    print("None")
+                                                             delta=0.1, density=1025, swept_area=0.7854, cp=0.37)
 
     """
     # Save frequencies data to a csv file
@@ -36,3 +37,6 @@ if __name__ == '__main__':
     # Save power_curves[2] data to a csv file
     pd.DataFrame(power_curves[2]).to_csv("Power_Curves_Performance.csv")
     """
+    import matplotlib.pyplot as plt
+    plt.plot(cumulated_power_time_series)
+    plt.show(block=True)
