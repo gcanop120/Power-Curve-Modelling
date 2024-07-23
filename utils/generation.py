@@ -85,3 +85,19 @@ def cumulate_power_frequencies(frequency: pd.DataFrame, power_curves: np.array, 
         cumulated_power.append(power)
     cumulated_power = np.array(cumulated_power)
     return cumulated_power
+
+
+def cumulate_power_time_series(min_rated_speed: float, max_rated_speed: float, filtered_nodes: pd.DataFrame, delta: float = 0.01,
+                               density: float = 1025, swept_area: float = 0.7854, cp: float = 0.37):
+    rated_speed_vector = np.arange(min_rated_speed, max_rated_speed + delta, delta)
+    cumulated_power = []
+    for rated_speed in rated_speed_vector:
+        power_per_node = []
+        for node in filtered_nodes.columns:
+            power = 0
+            for i in range(len(filtered_nodes)-43712):
+                power += 0.5 * cp * swept_area * density * (filtered_nodes[node].iloc[i] ** 3)
+            power_per_node.append(power)
+        cumulated_power.append(np.sum(power_per_node))
+    cumulated_power = np.array(cumulated_power)
+    return None
