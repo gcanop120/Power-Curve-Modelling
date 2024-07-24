@@ -31,12 +31,7 @@ if __name__ == '__main__':
     cumulated_power_time_series = cumulate_power_time_series(min_rated_speed=0.6, max_rated_speed=3, filtered_nodes=filtered_nodes,
                                                              delta=0.1, density=1025, swept_area=0.7854, cp=0.37)
 
-    """
-    # Save frequencies data to a csv file
-    pd.DataFrame(frequencies).to_csv("Frequencies_Performance.csv")
-    # Save power_curves[2] data to a csv file
-    pd.DataFrame(power_curves[2]).to_csv("Power_Curves_Performance.csv")
-    """
+
     import matplotlib.pyplot as plt
     plt.plot(cumulated_power_time_series)
     plt.show(block=True)
