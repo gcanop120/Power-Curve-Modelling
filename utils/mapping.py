@@ -120,3 +120,17 @@ def plot_power_curves_performance(cumulated_power: np.array):
     plt.grid(which='minor', linestyle='-', linewidth='0.5', color='black', alpha=0.10)
     plt.show(block=True)
     return
+
+
+def plot_power_curves_continuous(cumulated_power: np.array):
+    """
+    Function that plots the cumulative power performance for the power curves.
+    :param cumulated_power: cumulative power performance for the power curves.
+    :return: bar plot with the cumulative power performance for each power curve.
+    """
+    plt.plot(cumulated_power)
+    plt.xlabel('Continuous Power Curves')
+    plt.ylabel('Cumulative Power [Wh]')
+    plt.title('Cumulative Power Performance')
+    plt.show(block=True)
+    return

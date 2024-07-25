@@ -1,5 +1,3 @@
-import matplotlib.pyplot as plt
-
 from utils.files import load_time_series_geo
 from utils.files import filter_time_series_data
 from utils.mapping import selection_node
@@ -10,7 +8,7 @@ from utils.generation import gen_power_curves
 from utils.generation import cumulate_power_frequencies
 from utils.generation import cumulate_power_time_series
 from utils.mapping import plot_power_curves_performance
-
+from utils.mapping import plot_power_curves_continuous
 
 if __name__ == '__main__':
     PATH_geo = "../resources/Time_Series_Statistical_Features_per_Node.csv"
@@ -30,8 +28,4 @@ if __name__ == '__main__':
     # Time series cumulative approach
     cumulated_power_time_series = cumulate_power_time_series(min_rated_speed=0.6, max_rated_speed=3, filtered_nodes=filtered_nodes,
                                                              delta=0.1, density=1025, swept_area=0.7854, cp=0.37)
-
-
-    import matplotlib.pyplot as plt
-    plt.plot(cumulated_power_time_series)
-    plt.show(block=True)
+    plot_power_curves_continuous(cumulated_power_time_series)
