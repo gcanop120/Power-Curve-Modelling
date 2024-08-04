@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from  tqdm import tqdm
+from tqdm import tqdm
 
 
 def get_histograms(data: pd.DataFrame, bin_size: float = 0.1, max_velocity: float = 2.8):
@@ -119,3 +119,36 @@ def cumulate_power_time_series(min_rated_speed: float, max_rated_speed: float, f
         cumulated_power.append(np.sum(power_per_node))
     cumulated_power = np.array(cumulated_power)
     return cumulated_power
+
+
+def optimal_rs_per_node(min_rated_speed: float, max_rated_speed: float, filtered_nodes: pd.DataFrame, delta: float = 0.01,
+                        density: float = 1025, swept_area: float = 0.7854, cp: float = 0.37):
+    """
+    Function that computes the optimal rated speed for the power generation of each node.
+    :param min_rated_speed: Minimum rated speed for the water turbine in m/s.
+    :param max_rated_speed: Maximum rated speed for the water turbine in m/s.
+    :param filtered_nodes: Pandas DataFrame with the filtered time series data.
+    :param delta: Incremental value for the rated speed.
+    :param density: Density of the water in kg/m^3 (non-standard).
+    :param swept_area: Swept area of the water turbine in m^2.
+    :param cp: Coefficient of performance for the water turbine.
+    :return: optimal_rs: Array with the optimal rated speed for each node.
+    """
+    rated_speed_vector = np.arange(min_rated_speed, max_rated_speed + delta, delta)
+    optimal_rs = []  # List with the optimal rated speed computed for each node. The length of the list is equal to the number of nodes.
+    for node in filtered_nodes.columns:
+        power_per_rs = []
+        for rated_speed in tqdm(rated_speed_vector):
+            power = 0
+            for i in range(len(filtered_nodes)):
+                if filtered_nodes[node][i] < (rated_speed * 0.3):
+                    power += 0
+                elif (rated_speed * 0.3) <= filtered_nodes[node][i] < rated_speed:
+                    power += 0.5 * cp * swept_area * density * (filtered_nodes[node][i] ** 3)
+                else:
+                    power += 0.5 * cp * swept_area * density * (rated_speed ** 3)
+            power_per_rs.append(power)
+        power_per_rs = np.array(power_per_rs)
+        optimal_rs.append(rated_speed_vector[np.argmax(power_per_rs)])
+
+    return optimal_rs
