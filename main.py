@@ -11,6 +11,7 @@ from utils.mapping import plot_power_curves_performance
 from utils.mapping import plot_power_curves_continuous
 
 if __name__ == '__main__':
+    # Importing the files to be used in the analysis
     PATH_geo = "../resources/Time_Series_Statistical_Features_per_Node.csv"
     PATH_data = "../resources/Time_Series_Velocity_Data_per_Node.csv"
 
