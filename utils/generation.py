@@ -136,6 +136,7 @@ def optimal_rs_per_node(min_rated_speed: float, max_rated_speed: float, filtered
     """
     rated_speed_vector = np.arange(min_rated_speed, max_rated_speed + delta, delta)
     optimal_rs = []  # List with the optimal rated speed computed for each node. The length of the list is equal to the number of nodes.
+    optimal_power = []  # List with the optimal power computed for each node. The length of the list is equal to the number of nodes.
     for node in filtered_nodes.columns:
         power_per_rs = []
         for rated_speed in tqdm(rated_speed_vector):
@@ -149,6 +150,7 @@ def optimal_rs_per_node(min_rated_speed: float, max_rated_speed: float, filtered
                     power += 0.5 * cp * swept_area * density * (rated_speed ** 3)
             power_per_rs.append(power)
         power_per_rs = np.array(power_per_rs)
+        optimal_power.append(np.max(power_per_rs))
         optimal_rs.append(rated_speed_vector[np.argmax(power_per_rs)])
 
-    return optimal_rs
+    return optimal_rs, optimal_power
