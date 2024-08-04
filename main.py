@@ -31,7 +31,7 @@ if __name__ == '__main__':
     cumulated_power_frequencies = cumulate_power_frequencies(frequency=frequencies, power_curves=power_curves[2], hourly_data_points=len(filtered_nodes))
     plot_power_curves_performance(cumulated_power_frequencies)
 
-    # Time series cumulative approach
+    # Time series cumulative approach. (In progress)
     cumulated_power_time_series = cumulate_power_time_series(min_rated_speed=0.6, max_rated_speed=3, filtered_nodes=filtered_nodes,
                                                              delta=0.1, density=1025, swept_area=1.0, cp=0.37)
     plot_power_curves_continuous(cumulated_power_time_series)
