@@ -55,6 +55,9 @@ def selection_node(data: pd.DataFrame):
     plt.grid(which='minor', linestyle='-', linewidth='0.5', color='black', alpha=0.10)
     plt.show(block=True)
 
+    # Save the plot as an image
+    fig.savefig('Node_Selection.png', dpi=300)
+
     # Print the selected nodes tag and number
     print("Number of selected nodes:", len(selected_nodes))
     print("Selected nodes:", selected_nodes)
@@ -82,6 +85,7 @@ def plot_histograms(data: pd.DataFrame, relative: bool = True):
         plt.minorticks_on()
         plt.grid(which='major', linestyle='-', linewidth='0.5', color='black', alpha=0.15)
         plt.grid(which='minor', linestyle='-', linewidth='0.5', color='black', alpha=0.10)
+        plt.savefig('Velocity_Histograms_Relative_Frequency.png', dpi=300)
         plt.show(block=True)
     else:
         fig, ax = plt.subplots()
@@ -95,6 +99,7 @@ def plot_histograms(data: pd.DataFrame, relative: bool = True):
         plt.minorticks_on()
         plt.grid(which='major', linestyle='-', linewidth='0.5', color='black', alpha=0.15)
         plt.grid(which='minor', linestyle='-', linewidth='0.5', color='black', alpha=0.10)
+        plt.savefig('Velocity_Histograms_Number_of_Records.png', dpi=300)
         plt.show(block=True)
     return
 
@@ -118,6 +123,7 @@ def plot_power_curves_performance(cumulated_power: np.array):
     plt.minorticks_on()
     plt.grid(which='major', linestyle='-', linewidth='0.5', color='black', alpha=0.15)
     plt.grid(which='minor', linestyle='-', linewidth='0.5', color='black', alpha=0.10)
+    plt.savefig('Frequency_Cumulative_Power_Performance.png', dpi=300)
     plt.show(block=True)
     return
 
@@ -132,5 +138,9 @@ def plot_power_curves_continuous(cumulated_power: np.array):
     plt.xlabel('Continuous Power Curves')
     plt.ylabel('Cumulative Power [Wh]')
     plt.title('Cumulative Power Performance')
+    plt.minorticks_on()
+    plt.grid(which='major', linestyle='-', linewidth='0.5', color='black', alpha=0.15)
+    plt.grid(which='minor', linestyle='-', linewidth='0.5', color='black', alpha=0.10)
+    plt.savefig('Time_Series_Cumulative_Power_Performance.png', dpi=300)
     plt.show(block=True)
     return

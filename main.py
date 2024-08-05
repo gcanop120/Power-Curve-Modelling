@@ -13,8 +13,8 @@ from utils.generation import optimal_rs_per_node
 
 if __name__ == '__main__':
     # Paths to the data files for the time series data analysis.
-    PATH_geo = "../resources/Time_Series_Statistical_Features_per_Node.csv"
-    PATH_data = "../resources/Time_Series_Velocity_Data_per_Node.csv"
+    PATH_geo = "resources/Time_Series_Statistical_Features_per_Node.csv"
+    PATH_data = "resources/Time_Series_Velocity_Data_per_Node.csv"
 
     # Interactive node selection from the geographical map distribution.
     data_geo = load_time_series_geo(path=PATH_geo, tag_id="Tag", latitude_id="Latitude", longitude_id="Longitude")
