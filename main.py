@@ -29,13 +29,14 @@ if __name__ == '__main__':
     # Power curves return three values: minimum cut-in speed, maximum cut-out speed and power curves for each node.
     power_curves = gen_power_curves(frequencies=frequencies, min_ci_speed=0.2, min_rate_pct=30,
                                     delta_speed=0.025, swept_area=1.0, cp=0.37, water_density=1025)
-    cumulated_power_frequencies = cumulate_power_frequencies(frequency=frequencies, power_curves=power_curves[2], hourly_data_points=len(filtered_nodes))
+    cumulated_power_frequencies = cumulate_power_frequencies(frequency=frequencies, power_curves=power_curves[2],
+                                                             hourly_data_points=len(filtered_nodes))
     plot_power_curves_performance(cumulated_power_frequencies)
 
-    # Time series cumulative approach. (In progress)
+    # Time series cumulative approach. Compute the optimal rated speed and power generated for each node.
     cumulated_power_time_series = cumulate_power_time_series(min_rated_speed=0.6, max_rated_speed=3, filtered_nodes=filtered_nodes,
                                                              delta=0.1, density=1025, swept_area=1.0, cp=0.37)
-    # plot_power_curves_continuous(cumulated_power_time_series)
+    plot_power_curves_continuous(cumulated_power_time_series)
     optimal_rated_speeds = optimal_rs_per_node(min_rated_speed=0.6, max_rated_speed=3, filtered_nodes=filtered_nodes,
                                                delta=0.1, density=1025, swept_area=1.0, cp=0.37)
-    print("End of the Program.")
+    print("...code finished...")
