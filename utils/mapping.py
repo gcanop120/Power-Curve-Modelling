@@ -171,4 +171,17 @@ def plot_rated_speed_per_node(optimal_rated_speeds: tuple, selected_nodes: list,
     plt.grid(which='minor', linestyle='-', linewidth='0.5', color='black', alpha=0.10)
     plt.savefig('Optimal_Rated_Speed_per_Node.png', dpi=300)
     plt.show(block=True)
+
+    # Create a scatter plot colored by the optimal power.
+    fig, ax = plt.subplots()
+    plt.scatter(plot_data['longitude'], plot_data['latitude'], c=plot_data['optimal_power'], cmap='viridis', s=75)
+    plt.colorbar()
+    plt.xlabel('Longitude [°]')
+    plt.ylabel('Latitude [°]')
+    plt.title('Optimal Power per Node')
+    plt.minorticks_on()
+    plt.grid(which='major', linestyle='-', linewidth='0.5', color='black', alpha=0.15)
+    plt.grid(which='minor', linestyle='-', linewidth='0.5', color='black', alpha=0.10)
+    plt.savefig('Optimal_Power_per_Node.png', dpi=300)
+    plt.show(block=True)
     return
