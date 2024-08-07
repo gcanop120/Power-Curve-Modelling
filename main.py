@@ -10,6 +10,7 @@ from utils.generation import cumulate_power_time_series
 from utils.mapping import plot_power_curves_performance
 from utils.mapping import plot_power_curves_continuous
 from utils.generation import optimal_rs_per_node
+from utils.mapping import plot_rated_speed_per_node
 
 if __name__ == '__main__':
     # Paths to the data files for the time series data analysis.
@@ -38,6 +39,11 @@ if __name__ == '__main__':
                                                              filtered_nodes=filtered_nodes, delta=0.1,
                                                              density=1025, swept_area=1.0, cp=0.37)
     plot_power_curves_continuous(cumulated_power_time_series)
+
+    # Compute the optimal rated speed for each node and the optimal power generated.
     optimal_rated_speeds = optimal_rs_per_node(min_rated_speed=0.6, max_rated_speed=3, filtered_nodes=filtered_nodes,
                                                delta=0.1, density=1025, swept_area=1.0, cp=0.37)
+    plot_rated_speed_per_node(optimal_rated_speeds=optimal_rated_speeds, selected_nodes=selected_nodes,
+                              data=data_geo)
+
     print("...code finished...")

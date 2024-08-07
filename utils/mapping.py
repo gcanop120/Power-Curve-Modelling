@@ -144,3 +144,31 @@ def plot_power_curves_continuous(cumulated_power: np.array):
     plt.savefig('Time_Series_Cumulative_Power_Performance.png', dpi=300)
     plt.show(block=True)
     return
+
+
+def plot_rated_speed_per_node(optimal_rated_speeds: tuple, selected_nodes: list, data: pd.DataFrame):
+    """
+    Function that plots the optimal rated speed for each node.
+    :param optimal_rated_speeds: Tuple with the optimal rated speed for each node.
+    :param selected_nodes: List with the selected nodes.
+    :param data: Data with the geographical information.
+    :return: None
+    """
+    # Filter the data based on the nodes list.
+    plot_data = data[data['tag'].isin(selected_nodes)].copy()
+    plot_data['optimal_rated_speed'] = optimal_rated_speeds[0]
+    plot_data['optimal_power'] = optimal_rated_speeds[1]
+
+    # Create a scatter plot colored by the optimal rated speed.
+    fig, ax = plt.subplots()
+    plt.scatter(plot_data['longitude'], plot_data['latitude'], c=plot_data['optimal_rated_speed'], cmap='viridis', s=75)
+    plt.colorbar()
+    plt.xlabel('Longitude [°]')
+    plt.ylabel('Latitude [°]')
+    plt.title('Optimal Rated Speed per Node')
+    plt.minorticks_on()
+    plt.grid(which='major', linestyle='-', linewidth='0.5', color='black', alpha=0.15)
+    plt.grid(which='minor', linestyle='-', linewidth='0.5', color='black', alpha=0.10)
+    plt.savefig('Optimal_Rated_Speed_per_Node.png', dpi=300)
+    plt.show(block=True)
+    return
