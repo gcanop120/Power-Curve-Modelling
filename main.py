@@ -46,5 +46,5 @@ if __name__ == '__main__':
     plot_rated_speed_per_node(optimal_rated_speeds=optimal_rated_speeds, selected_nodes=selected_nodes,
                               data=data_geo)
 
-    print("...code completed, no errors found...")
+    print("...Code completed, No errors found...")
 
