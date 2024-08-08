@@ -160,12 +160,11 @@ def plot_rated_speed_per_node(optimal_rated_speeds: tuple, selected_nodes: list,
     plot_data['optimal_power'] = optimal_rated_speeds[1]
 
     # Create a scatter plot colored by the optimal rated speed.
-    fig, ax = plt.subplots()
     plt.scatter(plot_data['longitude'], plot_data['latitude'], c=plot_data['optimal_rated_speed'], cmap='viridis', s=75)
-    plt.colorbar()
     plt.xlabel('Longitude [°]')
     plt.ylabel('Latitude [°]')
     plt.title('Optimal Rated Speed per Node')
+    plt.colorbar().set_label('Rated Speed [m/s]')
     plt.minorticks_on()
     plt.grid(which='major', linestyle='-', linewidth='0.5', color='black', alpha=0.15)
     plt.grid(which='minor', linestyle='-', linewidth='0.5', color='black', alpha=0.10)
@@ -173,12 +172,11 @@ def plot_rated_speed_per_node(optimal_rated_speeds: tuple, selected_nodes: list,
     plt.show(block=True)
 
     # Create a scatter plot colored by the optimal power.
-    fig, ax = plt.subplots()
-    plt.scatter(plot_data['longitude'], plot_data['latitude'], c=plot_data['optimal_power'], cmap='viridis', s=75)
-    plt.colorbar()
+    plt.scatter(plot_data['longitude'], plot_data['latitude'], c=plot_data['optimal_power']/5, cmap='viridis', s=75)
     plt.xlabel('Longitude [°]')
     plt.ylabel('Latitude [°]')
     plt.title('Optimal Power per Node')
+    plt.colorbar().set_label('Power [Wh/m^2]')
     plt.minorticks_on()
     plt.grid(which='major', linestyle='-', linewidth='0.5', color='black', alpha=0.15)
     plt.grid(which='minor', linestyle='-', linewidth='0.5', color='black', alpha=0.10)
