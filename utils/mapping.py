@@ -176,7 +176,7 @@ def plot_rated_speed_per_node(optimal_rated_speeds: tuple, selected_nodes: list,
     plt.xlabel('Longitude [°]')
     plt.ylabel('Latitude [°]')
     plt.title('Optimal Power per Node')
-    plt.colorbar().set_label('Power [Wh/m^2]')
+    plt.colorbar().set_label('Power [Wh/m^2 yr]')
     plt.minorticks_on()
     plt.grid(which='major', linestyle='-', linewidth='0.5', color='black', alpha=0.15)
     plt.grid(which='minor', linestyle='-', linewidth='0.5', color='black', alpha=0.10)
