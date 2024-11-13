@@ -134,7 +134,7 @@ def plot_power_curves_continuous(cumulated_power: np.array):
     :param cumulated_power: cumulative power performance for the power curves.
     :return: bar plot with the cumulative power performance for each power curve.
     """
-    plt.plot( np.arange(0.6, 3.1, 0.1), cumulated_power/5, marker='o', color='YellowGreen')
+    plt.plot( np.arange(0.6, 3.1, 0.1), cumulated_power/5, marker='o', color='YellowGreen', markersize=10)
     plt.xlabel('Velocidad nominal [m/s]')
     plt.ylabel('Potencia acumulada [Wh/año]')
     plt.title('Potencial energético')

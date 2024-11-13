@@ -104,10 +104,13 @@ def cumulate_power_time_series(min_rated_speed: float, max_rated_speed: float, f
     """
     rated_speed_vector = np.arange(min_rated_speed, max_rated_speed + delta, delta)
     cumulated_power = []
+    ideal_cumulated_power = []
     for rated_speed in tqdm(rated_speed_vector):
         power_per_node = []
+        ideal_power_per_node = []
         for node in filtered_nodes.columns:
             power = 0
+            ideal_power = 0
             for i in range(len(filtered_nodes)):
                 if filtered_nodes[node][i] < (rated_speed * 0.3):
                     power += 0
@@ -115,10 +118,15 @@ def cumulate_power_time_series(min_rated_speed: float, max_rated_speed: float, f
                     power += 0.5 * cp * swept_area * density * (filtered_nodes[node][i] ** 3)
                 else:
                     power += 0.5 * cp * swept_area * density * (rated_speed ** 3)
+                ideal_power += 0.5 * cp * swept_area * density * (rated_speed ** 3)
             power_per_node.append(power)
+            ideal_power_per_node.append(ideal_power)
         cumulated_power.append(np.sum(power_per_node))
+        ideal_cumulated_power.append(np.sum(ideal_power_per_node))
     cumulated_power = np.array(cumulated_power)
-    return cumulated_power
+    ideal_cumulated_power = np.array(ideal_cumulated_power)
+    capacity_factor = cumulated_power / ideal_cumulated_power
+    return cumulated_power, capacity_factor
 
 
 def optimal_rs_per_node(min_rated_speed: float, max_rated_speed: float, filtered_nodes: pd.DataFrame, delta: float = 0.01,
