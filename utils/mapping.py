@@ -79,9 +79,9 @@ def plot_histograms(data: pd.DataFrame, relative: bool = True):
         for node in data.columns:
             ax.hist(data.index, bins=data.index, weights=data[node], alpha=0.7, label=node)
         ax.legend()
-        plt.xlabel('Velocity [m/s]')
-        plt.ylabel('Relative Frequency')
-        plt.title('Velocity Histograms')
+        plt.xlabel('Velocidad [m/s]')
+        plt.ylabel('Frecuencia relativa')
+        plt.title('Histogramas de velocidad')
         plt.minorticks_on()
         plt.grid(which='major', linestyle='-', linewidth='0.5', color='black', alpha=0.15)
         plt.grid(which='minor', linestyle='-', linewidth='0.5', color='black', alpha=0.10)
@@ -134,10 +134,10 @@ def plot_power_curves_continuous(cumulated_power: np.array):
     :param cumulated_power: cumulative power performance for the power curves.
     :return: bar plot with the cumulative power performance for each power curve.
     """
-    plt.plot(cumulated_power)
-    plt.xlabel('Continuous Power Curves')
-    plt.ylabel('Cumulative Power [Wh]')
-    plt.title('Cumulative Power Performance')
+    plt.plot( np.arange(0.6, 3.1, 0.1), cumulated_power/5, marker='o', color='YellowGreen')
+    plt.xlabel('Velocidad nominal [m/s]')
+    plt.ylabel('Potencia acumulada [Wh/año]')
+    plt.title('Potencial energético')
     plt.minorticks_on()
     plt.grid(which='major', linestyle='-', linewidth='0.5', color='black', alpha=0.15)
     plt.grid(which='minor', linestyle='-', linewidth='0.5', color='black', alpha=0.10)
